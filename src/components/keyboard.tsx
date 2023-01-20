@@ -27,6 +27,8 @@ const Keys = [
   "x",
   "y",
   "z",
+  "ç",
+  "-",
 ];
 
 const Wrapper = styled.div`
@@ -34,6 +36,13 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
   gap: 0.5rem;
   width: 600px;
+
+  @media (max-width: 500px) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
+    gap: 0.5rem;
+    width: 100%;
+  }
 `;
 
 const Button = styled.button<{ isActive: boolean }>`
@@ -58,14 +67,36 @@ const Button = styled.button<{ isActive: boolean }>`
   }
 `;
 
-export default function Keyboard() {
+interface KeyBoardProps {
+  disabled?: boolean;
+  activeLetters: string[];
+  inactiveLetters: string[];
+  addGuessedLetters: (letter: string) => void;
+}
+
+export default function Keyboard({
+  disabled = false,
+  activeLetters,
+  inactiveLetters,
+  addGuessedLetters,
+}: KeyBoardProps) {
   return (
     <Wrapper>
-      {Keys.map((letter) => (
-        <Button isActive={true} key={letter}>
-          {letter.toLocaleUpperCase()}
-        </Button>
-      ))}
+      {Keys.map((letter) => {
+        const isActive = !activeLetters.includes(letter);
+        const isInactive = !inactiveLetters.includes(letter);
+
+        return (
+          <Button
+            onClick={() => addGuessedLetters(letter)}
+            isActive={isActive && isInactive}
+            key={letter}
+            disabled={!(isActive && isInactive) || disabled}
+          >
+            {letter.toLocaleUpperCase()}
+          </Button>
+        );
+      })}
     </Wrapper>
   );
 }
