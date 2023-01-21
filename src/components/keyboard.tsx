@@ -37,11 +37,11 @@ const Wrapper = styled.div`
   gap: 0.5rem;
   width: 600px;
 
-  @media (max-width: 500px) {
+  @media (max-width: 768px) {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(55px, 1fr));
-    gap: 0.5rem;
-    width: 100%;
+    gap: 0.4rem;
+    max-width: 100%;
   }
 `;
 

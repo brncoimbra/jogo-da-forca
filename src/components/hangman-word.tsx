@@ -11,11 +11,23 @@ const Wrapper = styled.div`
 
 const Letter = styled.span`
   border-bottom: 0.1em solid white;
-  height: 50px;
+  min-height: 50px;
   min-width: 50px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
+    margin: -2px;
+    font-size: 2rem;
+    min-height: 20px;
     min-width: 30px;
+    flex: 1;
+  }
+
+  @media (max-width: 600px) {
+    margin: -2px;
+    font-size: 1.5rem;
+    min-height: 20px;
+    min-width: 15px;
+    flex: 1;
   }
 `;
 
